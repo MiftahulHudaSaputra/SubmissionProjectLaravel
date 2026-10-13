@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
 Route::get('/', function () {
  return view('welcome');
 });
@@ -51,7 +52,4 @@ Route::fallback(function () {
  return response('Halaman tidak ditemukan (kustom).', 404);
 });
 
-use App\Http\Controllers\ProdukController;
-Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
 Route::resource('produk', ProdukController::class); // 7 route CRUD sekaligus
