@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProductController;
+
 Route::get('/', function () {
  return view('welcome');
 });
@@ -53,10 +55,20 @@ Route::fallback(function () {
  return response('Halaman tidak ditemukan (kustom).', 404);
 });
 
+//produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
 Route::resource('produk', ProdukController::class); // 7 route CRUD sekaligus
 
+//mahasiswa
 Route::get('/profil', [MahasiswaController::class, 'profil'])->name('mahasiswa.profil');
 Route::get('/mahasiswa', [MahasiswaController::class, 'daftar'])->name('mahasiswa.daftar');
 Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'detail'])->name('mahasiswa.detail');
+
+//product
+Route::get('/products', [ProductController::class, 'index']);
+/*Route::get('/products/{id}', 
+function ($id) {
+    return 'Produk #' . $id;
+});*/
+Route::get('/products/{id}', [ProductController::class, 'show']);
